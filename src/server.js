@@ -1,6 +1,7 @@
 const express = require('express')
 const cors = require('cors')
 const compression = require('compression')
+const dayjs = require('dayjs')
 
 const app = express()
 const http = require('http')
@@ -9,7 +10,9 @@ const {Server} = require('socket.io')
 const io = new Server(server)
 
 const {productController} = require('./controller/product')
+const {messageController} = require('./controller/message')
 const productos = require('./Productos')
+let mensajes = []
 
 app.use('/static', express.static('static'))
 app.use(express.json())
@@ -22,12 +25,13 @@ app.get('/', (req, res) => {
 })
 
 io.on('connection', (socket)=>{
-    /* socket.emit('mensajes', mensajes)
+    socket.emit('mensajes', mensajes)
     socket.on('nuevo-mensaje', (mensaje)=>{
+        messageController(mensaje)
         mensaje.fecha = dayjs().format('DD/MM/YYYY HH:mm:ss')
         mensajes.push(mensaje)
         io.sockets.emit('enviar-mensaje', mensajes)
-    }) */
+    })
     socket.emit('productos', {productos: productos.listarProductos})
     socket.on('nuevo-producto', (producto)=>{
         productController(producto)

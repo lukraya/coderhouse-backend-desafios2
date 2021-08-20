@@ -6,7 +6,7 @@ exports.up = function(knex) {
         table.string('thumbnail').notNullable().unique()
         table.timestamps(true, true)
     })
-  };
+};
   
 exports.down = function(knex) {
     return knex.schema.dropTable('product')

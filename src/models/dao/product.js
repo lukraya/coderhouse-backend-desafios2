@@ -13,4 +13,8 @@ module.exports = class ProductDAO {
             console.log(error)
         }
     }
+
+    async listProducts(){
+        //acá hago un select? de la tabla
+    }
 }
