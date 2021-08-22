@@ -9,21 +9,25 @@ function enviarMensaje () {
 }
 
 function renderMensajes (mensajes) {
+    console.log(mensajes)
     let elHtml = mensajes.map((msj)=>{
         return (`
-            <p><span class="email">${msj.email}:</span> <span class="fecha">[${msj.fecha}]</span> <span class="mensaje">${msj.mensaje}</span></p>
+            <p><span class="email">${msj.email}:</span> <span class="fecha">[${msj.created_at}]</span> <span class="mensaje">${msj.mensaje}</span></p>
         `)
     })
     $("#mensajes").html(elHtml)
 }
 
 socket.on('mensajes', (data)=>{
-    renderMensajes(data)
+    //console.log(data)
+    renderMensajes(data.mensajes)
 })
 
 socket.on('enviar-mensaje', (data)=>{
     renderMensajes(data)
 })
+
+
 
 let templateTabla = Handlebars.compile(`
     <table class="table">
@@ -73,6 +77,7 @@ socket.on('productos', (data)=>{
     renderProductos(data.productos)
 })
 
-socket.on('enviar-producto', (data)=>{
+socket.on('enviar-productos', (data)=>{
+    //estoy recibiendo nuevamente la lista, pero sin actualizar
     renderProductos(data.productos)
 })
