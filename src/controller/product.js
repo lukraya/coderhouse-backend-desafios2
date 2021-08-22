@@ -15,6 +15,14 @@ class ProductController {
             console.log(error)
         }
     }
+
+    async deleteProduct(id){
+        await productService.deleteProduct(id)
+    }
+
+    async updateProduct(changes, id){
+        await productService.updateProduct(changes, id)
+    }
 }
 
 module.exports = new ProductController

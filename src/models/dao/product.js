@@ -16,8 +16,30 @@ module.exports = class ProductDAO {
 
     async listProducts(){
         try {
-            let prods = await db('product').select('title', 'price', 'thumbnail')
+            let prods = await db('product').select()
             return prods
+        }
+        catch (error) {
+            console.log(error)
+        }
+    }
+
+    async deleteProduct(id){
+        try {
+            await db('product').where({id: id}).del()
+        } 
+        catch (error) {
+            console.log(error)
+        }
+    }
+
+    async updateProduct({title, price, thumbnail}, id){
+        try {
+            await db('product').where({id: id}).update({
+                title: title,
+                price: price,
+                thumbnail: thumbnail
+            })
         }
         catch (error) {
             console.log(error)

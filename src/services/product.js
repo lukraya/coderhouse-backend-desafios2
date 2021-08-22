@@ -15,4 +15,12 @@ module.exports = class ProductService {
             console.log(error)
         }
     }
+
+    async deleteProduct(id){
+        await productDao.deleteProduct(id)
+    }
+
+    async updateProduct(changes, id){
+        await productDao.updateProduct(changes, id)
+    }
 }

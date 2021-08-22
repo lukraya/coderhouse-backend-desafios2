@@ -24,19 +24,12 @@ class Producto {
         return this.productos
     }
 
-    actualizarProducto(cambios, id) {
-        let indiceProd = this.productos.findIndex(prod=>{
-            return prod.id == id
-        })
-        let prodActualizado = {...cambios, id: id}
-        return this.productos[indiceProd] = prodActualizado;
+    async actualizarProducto(cambios, id) {
+        await productController.updateProduct(cambios, id)
     }
 
-    eliminarProducto(id) {
-        let indiceProd = this.productos.findIndex(prod=>{
-            return prod.id == id
-        })
-        return this.productos.splice(indiceProd, 1)[0]
+    async eliminarProducto(id) {
+        await productController.deleteProduct(id)
     }
 }
 
