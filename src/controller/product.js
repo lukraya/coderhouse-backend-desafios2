@@ -1,6 +1,20 @@
 const ProductService = require('../services/product')
 
-exports.productController = async (producto)=>{
-    const product = new ProductService()
-    await product.createProduct(producto)
+const productService = new ProductService()
+
+class ProductController {
+    async createProduct(producto){        
+        await productService.createProduct(producto)
+    }
+
+    async listProducts(){
+        try {
+            let prods = await productService.listProducts()
+            return prods
+        } catch (error) {
+            console.log(error)
+        }
+    }
 }
+
+module.exports = new ProductController

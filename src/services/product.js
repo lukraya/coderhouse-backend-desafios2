@@ -1,8 +1,18 @@
 const ProductDAO = require('../models/dao/product')
 
-module.exports = class ProductService {
+const productDao = new ProductDAO()
+
+module.exports = class ProductService {    
     async createProduct(product){
-        const productDao = new ProductDAO()
         return productDao.createProduct(product)        
+    }
+
+    async listProducts(){
+        try {
+            let prods = productDao.listProducts()
+            return prods
+        } catch (error) {
+            console.log(error)
+        }
     }
 }

@@ -9,7 +9,7 @@ const server = http.createServer(app)
 const {Server} = require('socket.io')
 const io = new Server(server)
 
-const {productController} = require('./controller/product')
+const productController = require('./controller/product')
 const {messageController} = require('./controller/message')
 const productos = require('./Productos')
 let mensajes = []
@@ -34,13 +34,9 @@ io.on('connection', (socket)=>{
     })
     socket.emit('productos', {productos: productos.listarProductos})
     socket.on('nuevo-producto', (producto)=>{
-        productController(producto)
         productos.nuevoProd(producto)     
-        io.sockets.emit('enviar-producto', {productos: productos.listarProductos})
+        io.sockets.emit('enviar-productos', {productos: productos.listarProductos})
     })
 })
 
 module.exports = server
-
-/* let productos = require('./Productos')
-let mensajes = [] */

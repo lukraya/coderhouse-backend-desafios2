@@ -15,6 +15,12 @@ module.exports = class ProductDAO {
     }
 
     async listProducts(){
-        //acá hago un select? de la tabla
+        try {
+            let prods = await db('product').select('title', 'price', 'thumbnail')
+            return prods
+        }
+        catch (error) {
+            console.log(error)
+        }
     }
 }

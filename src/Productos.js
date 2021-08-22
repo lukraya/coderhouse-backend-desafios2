@@ -1,16 +1,11 @@
+const productController = require('./controller/product')
+
 class Producto {
     productos = [];
     id = 0;
 
-    nuevoProd(producto) {        
-        this.productos.push({
-            title: producto.title,
-            price: producto.price,
-            thumbnail: producto.thumbnail,
-            id: ++this.id
-        });
-
-        return (this.productos[this.id - 1])
+    async nuevoProd(producto) {
+        await productController.createProduct(producto)
     }
 
     mostrarProd(id) {
@@ -25,6 +20,7 @@ class Producto {
     }
 
     get listarProductos() {
+        productController.listProducts().then(val=>{this.productos = val})
         return this.productos
     }
 
