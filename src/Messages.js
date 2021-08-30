@@ -1,31 +1,19 @@
 const messageController = require('./controller/message')
 
 class Mensaje {
-    mensajes = [];
-    id = 0;
+    mensajes = []
 
-    async nuevoMsj(mensaje) {
+    async newMsj(mensaje) {
         await messageController.createMessage(mensaje)
     }
 
-    mostrarMsj(id) {
-        let msj = this.mensajes.find(mensaje =>{
-            return mensaje.id == id
-        });
-        if (msj == undefined) {
-            return '{error: "Producto no encontrado."}'
-        }
-
-        return msj
-    }
-
     get listarMensajes() {
-        messageController.listMessages().then(val=>{this.mensajes = val})
+        messageController.getAllMessages().then(val=>{this.mensajes = val})
         return this.mensajes
     }
 
-    async actualizarMensaje(cambios, id) {
-        await messageController.updateMessage(cambios, id)
+    async actualizarMensaje(id, cambios) {
+        await messageController.updateMessage(id, cambios)
     }
 
     async eliminarMensaje(id) {

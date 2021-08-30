@@ -1,26 +1,27 @@
-const ProductDAO = require('../models/dao/product')
+const productModel = require('../dao/models/product')
 
-const productDao = new ProductDAO()
-
-module.exports = class ProductService {    
+module.exports = class {
     async createProduct(product){
-        return productDao.createProduct(product)        
+        await productModel.create(product)
     }
 
-    async listProducts(){
-        try {
-            let prods = productDao.listProducts()
-            return prods
-        } catch (error) {
-            console.log(error)
-        }
+    async getProduct(id){
+        return productModel.findById(id)
+    }
+
+    async getAllProducts(){
+        let prods = await productModel.find()
+        return prods
+    }
+
+    async updateProduct(id, data){
+        const productUpdated = await productModel.findByIdAndUpdate(id, data, {
+            new: true,
+        })
+        return productUpdated
     }
 
     async deleteProduct(id){
-        await productDao.deleteProduct(id)
-    }
-
-    async updateProduct(changes, id){
-        await productDao.updateProduct(changes, id)
+        await productModel.findByIdAndDelete(id)
     }
 }

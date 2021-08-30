@@ -1,27 +1,26 @@
 const MessageService = require('../services/message')
-
-const messageService = new MessageService()
+const message = new MessageService
 
 class MessageController {
-    async createMessage(mensaje){    
-        await messageService.createMessage(mensaje)
+    async createMessage(mensaje){        
+        await message.createMessage(mensaje)
     }
-
-    async listMessages(){
+    
+    async getAllMessages(){
         try {
-            let msgs = await messageService.listMessages()
+            let msgs = await message.getAllMessages()
             return msgs
         } catch (error) {
             console.log(error)
         }
     }
 
-    async deleteMessage(id){
-        await messageService.deleteMessage(id)
+    async updateMessage(id, data){
+        await message.updateMessage(id, data)
     }
 
-    async updateMessage(changes, id){
-        await messageService.updateMessage(changes, id)
+    async deleteMessage(id){
+        await message.deleteMessage(id)
     }
 }
 

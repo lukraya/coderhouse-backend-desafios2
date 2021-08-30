@@ -1,26 +1,23 @@
-const MessageDAO = require('../models/dao/message')
+const messageModel = require('../dao/models/message')
 
-const messageDao = new MessageDAO()
-
-module.exports = class MessageService {
-    async createMessage(message){        
-        return messageDao.createMessage(message)        
+module.exports = class {
+    async createMessage(message){
+        await messageModel.create(message)
     }
 
-    async listMessages(){
-        try {
-            let msgs = messageDao.listMessages()
-            return msgs
-        } catch (error) {
-            console.log(error)
-        }
+    async getAllMessages(){
+        let msgs = await messageModel.find()
+        return msgs
+    }
+
+    async updateMessage(id, data){
+        const messageUpdated = await messageModel.findByIdAndUpdate(id, data, {
+            new: true,
+        })
+        return messageUpdated
     }
 
     async deleteMessage(id){
-        await messageDao.deleteMessage(id)
-    }
-
-    async updateMessage(changes, id){
-        await messageDao.updateMessage(changes, id)
+        await messageModel.findByIdAndDelete(id)
     }
 }

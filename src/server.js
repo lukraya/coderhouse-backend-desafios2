@@ -22,14 +22,24 @@ app.get('/', (req, res) => {
 })
 
 //PRUEBAS EN POSTMAN
+app.get('/:id', (req, res)=>{
+    const {
+        params: {id}
+    } = req;
+    productos.getProd(id).then(val=>{res.send(val)})
+})
 app.put('/:id', (req, res)=>{
-    let toChange = req.body
-    let id = req.params.id
-    productos.actualizarProducto(toChange, id)
+    const {
+        body,
+        params: {id}
+    } = req;
+    productos.actualizarProducto(id, body)
     res.send(`Producto actualizado`)
 })
 app.delete('/:id', (req, res)=>{
-    let id = req.params.id
+    const {
+        params: {id}
+    } = req;
     productos.eliminarProducto(id)
     res.send(`Producto eliminado`)
 })
@@ -37,16 +47,16 @@ app.delete('/:id', (req, res)=>{
 io.on('connection', (socket)=>{
     socket.emit('mensajes', {mensajes: mensajes.listarMensajes})
     socket.on('nuevo-mensaje', (mensaje)=>{
-        mensajes.nuevoMsj(mensaje)
-        /* mensaje.fecha = dayjs().format('DD/MM/YYYY HH:mm:ss')
-        mensajes.push(mensaje) */
+        mensajes.newMsj(mensaje)
+        //mensaje.fecha = dayjs().format('DD/MM/YYYY HH:mm:ss')
         io.sockets.emit('enviar-mensaje', {mensajes: mensajes.listarMensajes})
     })
     socket.emit('productos', {productos: productos.listarProductos})
     socket.on('nuevo-producto', (producto)=>{
-        productos.nuevoProd(producto)     
+        productos.newProd(producto)     
         io.sockets.emit('enviar-productos', {productos: productos.listarProductos})
     })
 })
 
 module.exports = server
+

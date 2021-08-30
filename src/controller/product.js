@@ -1,28 +1,31 @@
 const ProductService = require('../services/product')
-
-const productService = new ProductService()
+const product = new ProductService
 
 class ProductController {
     async createProduct(producto){        
-        await productService.createProduct(producto)
+        await product.createProduct(producto)
     }
 
-    async listProducts(){
+    async getProduct(id){
+        return product.getProduct(id)
+    }
+
+    async getAllProducts(){
         try {
-            let prods = await productService.listProducts()
+            let prods = await product.getAllProducts()
             return prods
         } catch (error) {
             console.log(error)
         }
     }
 
-    async deleteProduct(id){
-        await productService.deleteProduct(id)
+    async updateProduct(id, data){
+        await product.updateProduct(id, data)
     }
 
-    async updateProduct(changes, id){
-        await productService.updateProduct(changes, id)
-    }
+    async deleteProduct(id){
+        await product.deleteProduct(id)
+    }    
 }
 
 module.exports = new ProductController

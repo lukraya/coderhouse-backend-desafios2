@@ -7,12 +7,12 @@ function enviarMensaje () {
     })
     return false
 }
-
+{/* <span class="fecha">[${msj.created_at}]</span> */}
 function renderMensajes (mensajes) {
     console.log(mensajes)
     let elHtml = mensajes.map((msj)=>{
         return (`
-            <p><span class="email">${msj.email}:</span> <span class="fecha">[${msj.created_at}]</span> <span class="mensaje">${msj.mensaje}</span></p>
+            <p><span class="email">${msj.email}:</span> <span class="mensaje">${msj.mensaje}</span></p>
         `)
     })
     $("#mensajes").html(elHtml)
@@ -74,6 +74,7 @@ function renderProductos (productos) {
 }
 
 socket.on('productos', (data)=>{
+    console.log(data)
     renderProductos(data.productos)
 })
 

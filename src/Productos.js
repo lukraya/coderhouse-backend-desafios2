@@ -1,31 +1,26 @@
 const productController = require('./controller/product')
 
 class Producto {
-    productos = [];
-    id = 0;
+    productos = []
 
-    async nuevoProd(producto) {
+    async newProd(producto) {
         await productController.createProduct(producto)
     }
 
-    mostrarProd(id) {
-        let prod = this.productos.find(producto =>{
-            return producto.id == id
-        });
-        if (prod == undefined) {
-            return '{error: "Producto no encontrado."}'
-        }
-
+    async getProd(id) {
+        let prod = await productController.getProduct(id)
         return prod
     }
 
     get listarProductos() {
-        productController.listProducts().then(val=>{this.productos = val})
+        productController.getAllProducts().then(val=>{this.productos = val})
         return this.productos
+        /* let prods = await productController.getAllProducts()
+        return prods */
     }
 
-    async actualizarProducto(cambios, id) {
-        await productController.updateProduct(cambios, id)
+    async actualizarProducto(id, cambios) {
+        await productController.updateProduct(id, cambios)
     }
 
     async eliminarProducto(id) {
