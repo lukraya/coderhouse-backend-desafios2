@@ -1,14 +1,14 @@
 const MessageService = require('../services/message')
-const message = new MessageService
+const messageService = new MessageService
 
 class MessageController {
     async createMessage(mensaje){        
-        await message.createMessage(mensaje)
+        await messageService.createMessage(mensaje)
     }
     
     async getAllMessages(){
         try {
-            let msgs = await message.getAllMessages()
+            let msgs = await messageService.getAllMessages()
             return msgs
         } catch (error) {
             console.log(error)
@@ -16,11 +16,11 @@ class MessageController {
     }
 
     async updateMessage(id, data){
-        await message.updateMessage(id, data)
+        await messageService.updateMessage(id, data)
     }
 
     async deleteMessage(id){
-        await message.deleteMessage(id)
+        await messageService.deleteMessage(id)
     }
 }
 

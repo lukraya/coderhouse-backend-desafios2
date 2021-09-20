@@ -1,18 +1,18 @@
 const ProductService = require('../services/product')
-const product = new ProductService
+const productService = new ProductService
 
 class ProductController {
     async createProduct(producto){        
-        await product.createProduct(producto)
+        await productService.createProduct(producto)
     }
 
     async getProduct(id){
-        return product.getProduct(id)
+        return productService.getProduct(id)
     }
 
     async getAllProducts(){
         try {
-            let prods = await product.getAllProducts()
+            let prods = await productService.getAllProducts()
             return prods
         } catch (error) {
             console.log(error)
@@ -20,11 +20,11 @@ class ProductController {
     }
 
     async updateProduct(id, data){
-        await product.updateProduct(id, data)
+        await productService.updateProduct(id, data)
     }
 
     async deleteProduct(id){
-        await product.deleteProduct(id)
+        await productService.deleteProduct(id)
     }    
 }
 
