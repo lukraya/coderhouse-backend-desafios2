@@ -5,32 +5,39 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Productos</title>
-    <link rel="stylesheet" href="../static/main.css">
     <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="../static/main.css">
     <script src="/socket.io/socket.io.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/normalizr@3.6.1/dist/normalizr.browser.min.js"></script>
     <script src="../static/main.js"></script>
 </head>
-<body>
+<body>    
+    <h3>Productos</h3>
     <form id="formulario" onsubmit="return enviarProducto(this)">
         <input type="text" id="title" name="title" placeholder="Título"><br>
         <input type="text" id="price" name="price" placeholder="Precio"><br>        
         <input type="text" id="thumbnail" name="url" placeholder="URL de la imagen"><br>
         <button type="submit">Enviar</button>
     </form>
+    <div id="listado" class="well">
+        
+    </div>
     <h3>Mensajes</h3>
     <div id="mensajes">
         
     </div>
     <form onsubmit="return enviarMensaje(this)">
         <input id="email" type="email" placeholder="juan@somemail.com"/> 
+        <input id="nombre" type="text" placeholder="Juan"/>
+        <input id="apellido" type="text" placeholder="Perez"/>
+        <input id="edad" type="text" placeholder="30"/>
+        <input id="alias" type="text" placeholder="juancho"/>
+        <input id="avatar" type="text" placeholder="URL de la imagen"/>
         <input id="mensaje" type="text" placeholder="Mensaje a enviar"/>
         <input type="submit"></input>
-    </form>
-    <div id="listado" class="well">
-        
-    </div>
+    </form>    
 </body>
 </html>

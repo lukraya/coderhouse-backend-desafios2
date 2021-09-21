@@ -1,4 +1,5 @@
 const messageController = require('./controller/message')
+const normalizeData = require('./normalize')
 
 class Mensaje {
     mensajes = []
@@ -7,9 +8,29 @@ class Mensaje {
         await messageController.createMessage(mensaje)
     }
 
-    get listarMensajes() {
-        messageController.getAllMessages().then(val=>{this.mensajes = val})
-        return this.mensajes
+    /* get listarMensajes() {
+        let toNormalize;
+        let normalizedData;
+        messageController.getAllMessages().then(val=>{
+            toNormalize = {
+                id: 1,
+                content: val
+            }
+        }).then(()=> normalizedData = normalizeData(toNormalize))
+        
+        return normalizedData
+    } */
+    async listarMensajes () {
+        const content = await messageController.getAllMessages()
+        const toNormalize = {
+            id: 1,
+            content: content
+        }
+        //console.log(toNormalize)
+        const normalizedData = normalizeData(toNormalize)
+        //console.log(normalizedData.entities.chat)
+        
+        return normalizedData
     }
 
     async actualizarMensaje(id, cambios) {

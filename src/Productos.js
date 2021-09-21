@@ -14,9 +14,8 @@ class Producto {
 
     get listarProductos() {
         productController.getAllProducts().then(val=>{this.productos = val})
+        //console.log(this.productos)
         return this.productos
-        /* let prods = await productController.getAllProducts()
-        return prods */
     }
 
     async actualizarProducto(id, cambios) {

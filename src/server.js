@@ -44,18 +44,22 @@ app.delete('/:id', (req, res)=>{
     res.send(`Producto eliminado`)
 })
 
-io.on('connection', (socket)=>{
-    socket.emit('mensajes', {mensajes: mensajes.listarMensajes})
-    socket.on('nuevo-mensaje', (mensaje)=>{
-        mensajes.newMsj(mensaje)
-        //mensaje.fecha = dayjs().format('DD/MM/YYYY HH:mm:ss')
-        io.sockets.emit('enviar-mensaje', {mensajes: mensajes.listarMensajes})
-    })
+io.on('connection', async (socket)=>{
+    //console.log("nuevo socket")
     socket.emit('productos', {productos: productos.listarProductos})
     socket.on('nuevo-producto', (producto)=>{
         productos.newProd(producto)     
         io.sockets.emit('enviar-productos', {productos: productos.listarProductos})
     })
+
+    let chatHistory = await mensajes.listarMensajes()
+    socket.emit('mensajes', chatHistory)
+    socket.on('nuevo-mensaje', async (mensaje)=>{
+        mensajes.newMsj(mensaje)
+        //mensaje.fecha = dayjs().format('DD/MM/YYYY HH:mm:ss')
+        chatHistory = await mensajes.listarMensajes()
+        io.sockets.emit('enviar-mensaje', chatHistory)
+    })    
 })
 
 module.exports = server

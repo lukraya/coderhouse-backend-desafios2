@@ -2,17 +2,28 @@ let socket = io()
 
 function enviarMensaje () {
     socket.emit('nuevo-mensaje', {
-        email: $("#email").val(),
-        mensaje: $("#mensaje").val()
+        author: {
+            id: $("#email").val(),
+            nombre: $("#nombre").val(),
+            apellido: $("#apellido").val(),
+            edad: $("#edad").val(),
+            alias: $("#alias").val(),
+            avatar: $("#avatar").val(),
+        },        
+        text: $("#mensaje").val()
     })
     return false
 }
+
 {/* <span class="fecha">[${msj.created_at}]</span> */}
+{/* <img src="${author.avatar}" alt="avatar de ${author.alias}" class="avatar"></img> */}
 function renderMensajes (mensajes) {
-    console.log(mensajes)
-    let elHtml = mensajes.map((msj)=>{
+    //console.log(mensajes)
+    let elHtml = mensajes.map(({author, text})=>{
         return (`
-            <p><span class="email">${msj.email}:</span> <span class="mensaje">${msj.mensaje}</span></p>
+            <p>
+                <span class="email">${author.alias}:</span> <span class="mensaje">${text}</span>                
+            </p>
         `)
     })
     $("#mensajes").html(elHtml)
@@ -20,7 +31,17 @@ function renderMensajes (mensajes) {
 
 socket.on('mensajes', (data)=>{
     //console.log(data)
-    renderMensajes(data.mensajes)
+    const userSchema = new normalizr.schema.Entity('authors')
+    const entrySchema = new normalizr.schema.Entity('entries', {
+        author: userSchema,    
+    }, {idAttribute: (value) => value._id.toString()})
+    const chatSchema = new normalizr.schema.Entity('chat', {
+        content: [entrySchema]
+    })
+
+    const denormalizedData = normalizr.denormalize(data.result, chatSchema, data.entities)
+
+    renderMensajes(denormalizedData.content)
 })
 
 socket.on('enviar-mensaje', (data)=>{
@@ -74,7 +95,7 @@ function renderProductos (productos) {
 }
 
 socket.on('productos', (data)=>{
-    console.log(data)
+    //console.log(data)
     renderProductos(data.productos)
 })
 

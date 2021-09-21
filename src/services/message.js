@@ -6,7 +6,7 @@ module.exports = class {
     }
 
     async getAllMessages(){
-        let msgs = await messageModel.find()
+        let msgs = await messageModel.find().lean()
         return msgs
     }
 

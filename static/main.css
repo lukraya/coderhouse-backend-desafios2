@@ -1,3 +1,7 @@
+body {
+    margin-left: 10px;
+}
+
 .email {
     font-weight: bold;
     color: blue;
@@ -10,4 +14,9 @@
 .mensaje {
     color: green;
     font-style: italic;
+}
+
+.avatar {
+    width: 40px;
+    height: 40px;
 }
