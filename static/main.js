@@ -1,5 +1,9 @@
 let socket = io()
 
+/* $(document).ready(()=>{
+    $("#username").html(user)
+}) */
+
 function enviarMensaje () {
     socket.emit('nuevo-mensaje', {
         author: {

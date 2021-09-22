@@ -1,6 +1,8 @@
 const express = require('express')
 const cors = require('cors')
 const compression = require('compression')
+const session = require("express-session")
+const cookieParser = require("cookie-parser")
 
 const app = express()
 const http = require('http')
@@ -13,12 +15,42 @@ const mensajes = require('./Messages')
 
 app.use('/static', express.static('static'))
 app.use(express.json())
+app.use(express.urlencoded({extended: true}))
 app.use(cors())
 app.use(compression())
 
+app.use(
+    session({
+      secret: "secret",
+      resave: true,
+      saveUninitialized: true,
+      cookie: {
+          maxAge: 60 * 1000
+      }
+    })
+)
+app.use(cookieParser())
 
+
+app.get('/login', (req, res)=>{
+    res.sendFile(__dirname + '/login.html')
+})
+app.post('/login', (req, res)=>{
+    console.log(`RECEIVED ${req.body}`)
+    if (!req.body.user) throw new Error("No ingresó un usuario")
+    const { user } = req.body
+    req.session.user = user
+    res.redirect('/')
+})
+
+let username;
 app.get('/', (req, res) => {
-    res.sendFile(__dirname + '/index.html')
+    if(res.session.user) {
+        username = req.session.user
+        res.sendFile(__dirname + '/index.html')
+    }
+
+    
 })
 
 //PRUEBAS EN POSTMAN
