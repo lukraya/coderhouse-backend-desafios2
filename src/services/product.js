@@ -10,7 +10,7 @@ module.exports = class {
     }
 
     async getAllProducts(){
-        let prods = await productModel.find()
+        let prods = await productModel.find().lean()
         return prods
     }
 

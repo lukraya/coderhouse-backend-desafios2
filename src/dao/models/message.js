@@ -1,10 +1,5 @@
 const {Schema, model} = require('mongoose')
 
-/* const messageSchema = new Schema({
-    email: String,
-    mensaje: String,
-}, {collection: 'mensajes'}) */
-
 const messageSchema = new Schema({
     author: {
         id: {type: String},
