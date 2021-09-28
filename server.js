@@ -7,6 +7,8 @@ const router = express.Router()
 const session = require("express-session")
 const { SESSION_SECRET } = require("./src/config/globals")
 const cookieParser = require("cookie-parser")
+const MongoStore = require('connect-mongo')
+const mongoOptions = {useNewUrlParser: true, useUnifiedTopology: true}
 
 const handlebars = require("express-handlebars")
 const cors = require('cors')
@@ -30,12 +32,16 @@ app.set("views", './views')
 //Middleware session
 app.use(
     session({
-      secret: SESSION_SECRET,
-      resave: true,
-      saveUninitialized: true,
-      cookie: {
-          maxAge: 60 * 1000
-      }
+        store: MongoStore.create({
+            mongoUrl: 'mongodb+srv://user-coder:8XCxwH8FgZCPcAQ9@backendch.yfq2r.mongodb.net?retryWrites=true&w=majority',
+            mongoOptions,
+        }),
+        secret: SESSION_SECRET,
+        resave: true,
+        saveUninitialized: true,
+        cookie: {
+            maxAge: 600 * 1000
+        }
     })
 )
   
