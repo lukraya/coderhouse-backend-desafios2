@@ -10,8 +10,12 @@ module.exports = class {
     }
 
     async getAllProducts(){
-        let prods = await productModel.find().lean()
-        return prods
+        try {
+            let prods = await productModel.find().lean()
+            return prods
+        } catch (error) {
+            console.log(error)
+        }
     }
 
     async updateProduct(id, data){

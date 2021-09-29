@@ -6,8 +6,12 @@ module.exports = class {
     }
 
     async getAllMessages(){
-        let msgs = await messageModel.find().lean()
-        return msgs
+        try {
+            let msgs = await messageModel.find().lean()
+            return msgs
+        } catch (error) {
+            console.log(error)
+        }
     }
 
     async updateMessage(id, data){
