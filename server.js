@@ -13,7 +13,6 @@ const mongoOptions = {useNewUrlParser: true, useUnifiedTopology: true}
 
 //Authentication
 const passport = require('passport')
-//middleware to check if logged, i put in routes
 const session = require("express-session")
 require('./src/auth/passport')
 
@@ -28,7 +27,7 @@ app.engine(
     "hbs",
     handlebars({
         extname: "hbs",
-        defaultLayout: "main.hbs", // El layout que va a cargar en todas las paginas por default
+        defaultLayout: "main.hbs",
         layoutsDir: "./views/layouts",
         partialsDir: "./views/partials",    
     })
@@ -42,8 +41,7 @@ app.set("views", './views')
 app.use(
     session({
         store: MongoStore.create({
-            mongoUrl: MONGO_URI
-            /* 'mongodb+srv://user-coder:8XCxwH8FgZCPcAQ9@backendch.yfq2r.mongodb.net?retryWrites=true&w=majority' */,
+            mongoUrl: MONGO_URI,
             mongoOptions,
         }),
         secret: SESSION_SECRET,
@@ -64,10 +62,8 @@ app.use(cors())
 app.use(compression())
 app.use('/static', express.static('static'))
 
-
 //Las rutas después de json o urlencoded!!
 const routes = require('./src/routes/routes')
 app.use(routes(router))
-
 
 module.exports = server
