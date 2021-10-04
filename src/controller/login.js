@@ -5,12 +5,11 @@ class LoginController {
         res.render('./pages/login')
     }
 
-    postLogin (req, res){
-        if (!req.body.user) throw new Error("No ingresó un usuario")
-        const { user } = req.body
-        req.session.user = user
+    /* postLogin (req, res){
+        const { username } = req.body
+        req.session.username = username
         res.redirect('/')
-    }
+    } */
 }
 
 module.exports = new LoginController

@@ -7,7 +7,8 @@ class IndexController {
     async getIndex (req, res){
         const products = await productService.getAllProducts()
         const messages = await messageService.getAllMessages()
-        const username = req.session.user
+        const username = req.user.username
+        console.log(username)
         
         res.render('./pages/home', {messages, products, username})
     }

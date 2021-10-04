@@ -1,20 +1,27 @@
+const { SESSION_SECRET, MONGO_URI } = require("./src/config/globals")
+
+//Server
 const http = require('http')
 const express = require('express')
 const app = express()
 const server = http.createServer(app)
 const router = express.Router()
 
-const session = require("express-session")
-const { SESSION_SECRET } = require("./src/config/globals")
-const cookieParser = require("cookie-parser")
+//db
 const MongoStore = require('connect-mongo')
 const mongoOptions = {useNewUrlParser: true, useUnifiedTopology: true}
 
+//Authentication
+const passport = require('passport')
+//middleware to check if logged, i put in routes
+const session = require("express-session")
+require('./src/auth/passport')
 
-
-const handlebars = require("express-handlebars")
+//Require middlewares
+const cookieParser = require("cookie-parser")
 const cors = require('cors')
 const compression = require('compression')
+const handlebars = require("express-handlebars")
 
 //Configuración de motor de plantilla
 app.engine(
@@ -35,7 +42,8 @@ app.set("views", './views')
 app.use(
     session({
         store: MongoStore.create({
-            mongoUrl: 'mongodb+srv://user-coder:8XCxwH8FgZCPcAQ9@backendch.yfq2r.mongodb.net?retryWrites=true&w=majority',
+            mongoUrl: MONGO_URI
+            /* 'mongodb+srv://user-coder:8XCxwH8FgZCPcAQ9@backendch.yfq2r.mongodb.net?retryWrites=true&w=majority' */,
             mongoOptions,
         }),
         secret: SESSION_SECRET,
@@ -46,13 +54,16 @@ app.use(
         }
     })
 )
-  
-app.use(cookieParser())
+//Setting middlewares
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
+app.use(passport.initialize())
+app.use(passport.session())
+app.use(cookieParser())
 app.use(cors())
 app.use(compression())
 app.use('/static', express.static('static'))
+
 
 //Las rutas después de json o urlencoded!!
 const routes = require('./src/routes/routes')
