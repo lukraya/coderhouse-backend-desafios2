@@ -14,7 +14,8 @@ const mongoOptions = {useNewUrlParser: true, useUnifiedTopology: true}
 //Authentication
 const passport = require('passport')
 const session = require("express-session")
-require('./src/auth/passport')
+//require('./src/auth/passportLocal')
+require('./src/auth/passportFacebook')
 
 //Require middlewares
 const cookieParser = require("cookie-parser")
@@ -61,6 +62,13 @@ app.use(cookieParser())
 app.use(cors())
 app.use(compression())
 app.use('/static', express.static('static'))
+
+//debug
+/* app.use((req, res, next)=>{
+    console.log(req.session)
+    console.log(req.user)
+    next()
+}) */
 
 //Las rutas después de json o urlencoded!!
 const routes = require('./src/routes/routes')

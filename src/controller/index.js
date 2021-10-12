@@ -7,10 +7,15 @@ class IndexController {
     async getIndex (req, res){
         const products = await productService.getAllProducts()
         const messages = await messageService.getAllMessages()
-        const username = req.user.username
-        console.log(username)
+        //const username = req.user.username
+        const username = `${req.user.firstName} ${req.user.lastName}`
+        const email = req.user.email
+        const picture = req.user.picture
+        //console.log('estoy en index')
+        console.log(req.user)
+        //VER DÓNDE Y QUÉ ME PASA FB
         
-        res.render('./pages/home', {messages, products, username})
+        res.render('./pages/home', {messages, products, username, email, picture})
     }
 
     async postProductos (req, res){
