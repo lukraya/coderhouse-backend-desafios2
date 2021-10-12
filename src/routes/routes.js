@@ -1,5 +1,6 @@
 const { getIndex, postProductos, postMensajes } = require('../controller/index')
 const { getLogin, getSignup, getFaillogin, getFailsignup, getLogout} = require('../controller/authentication')
+const { getInfo } = require('../controller/info')
 const passport = require('passport')
 //require('../auth/passportLocal')
 require('../auth/passportFacebook')
@@ -38,6 +39,10 @@ module.exports = (router) =>{
 
     //LOGOUT    
     .get('/logout', getLogout)
+
+    //INFO Y RANDOM
+    .get('/info', getInfo)
+    .get('/randoms')
     
     return router
 }

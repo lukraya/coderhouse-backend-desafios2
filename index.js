@@ -9,3 +9,9 @@ getConnection().then((message)=>{
         else {console.log("Server listening on PORT", PORT);}
     })
 }).catch(console.log)
+
+process.on('exit', code => {
+    console.log('Salida con código: ' + code)
+})
+
+//process.exit(2)
