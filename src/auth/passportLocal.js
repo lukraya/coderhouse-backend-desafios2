@@ -56,11 +56,9 @@ passport.use('signup', signupStrategy)
 
 
 passport.serializeUser((user, done)=>{
-    console.log('serialize en local')
     done(null, user._id)
 })
 passport.deserializeUser((id, done)=>{
-    console.log('deserialize en local')
     userModel.findById(id, (err, user)=>{
         done(err, user)
     })

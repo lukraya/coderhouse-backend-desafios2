@@ -18,17 +18,11 @@ class AuthenticationController {
 
     async getLogout (req, res){
         //const username = req.user.username
+        const username = `${req.user.firstName} ${req.user.lastName}`
         req.logout()
 
-        res.render('./pages/logout', {layout: 'loggedout', username: 'lalla'})
-    }
-
-    /* async getFbLogin (req, res){
-        //res.render('./pages/fbLogin')
-        console.log('entró a getFbLogin')
-        //console.log(req.user)
-        res.redirect('/')
-    } */
+        res.render('./pages/logout', {layout: 'loggedout', username})
+    }    
 }
 
 module.exports = new AuthenticationController

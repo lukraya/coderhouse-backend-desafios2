@@ -63,12 +63,6 @@ app.use(cors())
 app.use(compression())
 app.use('/static', express.static('static'))
 
-//debug
-/* app.use((req, res, next)=>{
-    console.log(req.session)
-    console.log(req.user)
-    next()
-}) */
 
 //Las rutas después de json o urlencoded!!
 const routes = require('./src/routes/routes')

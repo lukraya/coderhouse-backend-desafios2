@@ -5,7 +5,6 @@ const userFbModel = require('../dao/models/userFb')
 
 
 const loginVerifyCallback = (accessToken, refreshToken, profile, done)=>{
-    //console.log(profile._json)
     const { id, last_name, first_name, picture, email } = profile._json
     const { url } = picture.data
     
@@ -30,12 +29,6 @@ const loginVerifyCallback = (accessToken, refreshToken, profile, done)=>{
             }
         })
         .catch((err)=>{ done(err) })
-
-    /* userFbModel.findOrCreate(user, (err, user, created)=>{
-        if (err) return done(err)
-        
-        return done(null, user)
-    }) */
 }
 const loginStrategy = new FacebookStrategy({
     clientID: FB_TEST_APP_ID,
@@ -49,13 +42,10 @@ passport.use('facebook', loginStrategy)
 
 
 passport.serializeUser((user, done)=>{
-    //console.log(`user en serialize: ${user}`)
     done(null, user._id)
 })
 passport.deserializeUser((id, done)=>{
-    //console.log('entra en deserialize')
     userFbModel.findById(id, (err, user)=>{
         done(err, user)
     })
 })
-//VER QUÉ HACEN SERIALIZA Y DESERIALIZE

@@ -1,5 +1,5 @@
 const { getIndex, postProductos, postMensajes } = require('../controller/index')
-const { getLogin, getSignup, getFaillogin, getFailsignup, getLogout, getFbLogin} = require('../controller/authentication')
+const { getLogin, getSignup, getFaillogin, getFailsignup, getLogout} = require('../controller/authentication')
 const passport = require('passport')
 //require('../auth/passportLocal')
 require('../auth/passportFacebook')
@@ -31,7 +31,7 @@ module.exports = (router) =>{
     //.post('/signup', passport.authenticate('signup', { failureRedirect: '/failsignup', successRedirect: '/login' }))
     //Facebook
     .get('/login-facebook', passport.authenticate('facebook'))
-    .get('/login-facebook/view', passport.authenticate('facebook', {successRedirect: '/', failureRedirect: '/faillogin'})/* , getFbLogin */)
+    .get('/login-facebook/view', passport.authenticate('facebook', {successRedirect: '/', failureRedirect: '/faillogin'}))
     //Error
     .get('/faillogin', getFaillogin)
     .get('/failsignup', getFailsignup)
