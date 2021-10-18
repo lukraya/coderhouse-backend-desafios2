@@ -1,0 +1,17 @@
+1. Sin argumento para que caiga por default en FORK, configurado en src/config/globals
+    nodemon index.js
+2. Argumento FORK
+    nodemon index.js FORK
+3. Argumento CLUSTER
+    nodemon index.js CLUSTER
+
+4. Cambio de archivo para simplificar.
+    forever start indexForeverYPm2.js
+    forever start -w indexForeverYPm2.js
+    (forever stopall)
+
+5. PM2 modo FORK
+    pm2 start indexForeverYPm2.js --name="ServerPm2Fork" --watch
+6. PM2 modo CLUSTER
+    pm2 start indexForeverYPm2.js --name="ServerPm2Cluster" --watch -i max
+    (pm2 delete all)

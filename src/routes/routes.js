@@ -42,7 +42,8 @@ module.exports = (router) =>{
 
     //INFO Y RANDOM
     .get('/info', getInfo)
-    .get('/randoms/:cant?', getRandoms)
+    //Desactivo endpoint de randoms para desafio 29
+    //.get('/randoms/:cant?', getRandoms)
     
     return router
 }

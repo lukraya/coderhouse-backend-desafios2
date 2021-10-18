@@ -1,4 +1,5 @@
 const { fork } = require('child_process')
+const numCPUs = require('os').cpus().length
 
 class InfoController {
     getInfo (req, res) {
@@ -9,13 +10,15 @@ class InfoController {
             memoria: JSON.stringify(process.memoryUsage()),
             path: process.execPath,
             id: process.pid,
-            carpeta: process.cwd()
+            carpeta: process.cwd(),
+            numCPUs
         }
 
         res.render('./pages/info', {info})
     }
 
-    getRandoms (req, res) {
+    //getRandoms desactivado para desafio 29
+    /* getRandoms (req, res) {
         const cant = req.params.cant ? req.params.cant : 100000000
 
         const randoms = fork('./src/utils/getRandomNums.js')
@@ -23,7 +26,7 @@ class InfoController {
         randoms.on('message', result => {
             res.send(`El resultado es ${JSON.stringify(result)}`)
         })
-    }
+    } */
 }
 
 module.exports = new InfoController
