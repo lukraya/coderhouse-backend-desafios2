@@ -15,3 +15,24 @@
 6. PM2 modo CLUSTER
     pm2 start indexForeverYPm2.js --name="ServerPm2Cluster" --watch -i max
     (pm2 delete all)
+
+<------------------- DESAFIO 30 - SERVIDOR NGINX --------------------->
+1. pm2 start indexForeverYPm2.js --name="Server1" --watch -- FORK 8081
+2. pm2 start index.js --name="Server2" --watch -- CLUSTER 8082
+3. Configuración en ngix:
+    upstream node_app {
+        server 127.0.0.1:8081; 
+        server 127.0.0.1:8082 weight=4;
+    }
+
+    server {
+        listen       80;
+       
+        location / {
+            proxy_pass http://node_app;
+        }
+4. start nginx
+    (en consola de windows)
+
+Me da 4 peticiones a Server2 - modo cluster - puerto 8082 - pid 10296,
+y una a Server1 - modo fork - puerto 8081 - pid 7140.

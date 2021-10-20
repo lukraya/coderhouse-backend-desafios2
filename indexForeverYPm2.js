@@ -1,4 +1,4 @@
-const { PORT} = require('./src/config/globals')
+const { PORT } = require('./src/config/globals')
 const {getConnection} = require('./src/dao/db/connection')
 const server = require('./server')
 

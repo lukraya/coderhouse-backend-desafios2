@@ -17,8 +17,8 @@ class InfoController {
         res.render('./pages/info', {info})
     }
 
-    //getRandoms desactivado para desafio 29
-    /* getRandoms (req, res) {
+    //getRandoms reactivado para desafio 30
+    getRandoms (req, res) {
         const cant = req.params.cant ? req.params.cant : 100000000
 
         const randoms = fork('./src/utils/getRandomNums.js')
@@ -26,7 +26,7 @@ class InfoController {
         randoms.on('message', result => {
             res.send(`El resultado es ${JSON.stringify(result)}`)
         })
-    } */
+    }
 }
 
 module.exports = new InfoController
