@@ -2,11 +2,19 @@ const productModel = require('../dao/models/product')
 
 module.exports = class {
     async createProduct(product){
-        await productModel.create(product)
+        try {
+            await productModel.create(product)
+        } catch (error) {
+            console.log(error)
+        }
     }
 
     async getProduct(id){
-        return productModel.findById(id)
+        try {
+            return productModel.findById(id)
+        } catch (error) {
+            console.log(error)
+        }
     }
 
     async getAllProducts(){
@@ -19,13 +27,21 @@ module.exports = class {
     }
 
     async updateProduct(id, data){
-        const productUpdated = await productModel.findByIdAndUpdate(id, data, {
-            new: true,
-        })
-        return productUpdated
+        try {
+            const productUpdated = await productModel.findByIdAndUpdate(id, data, {
+                new: true,
+            })
+            return productUpdated
+        } catch (error) {
+            console.log(error)
+        }
     }
 
     async deleteProduct(id){
-        await productModel.findByIdAndDelete(id)
+        try {
+            await productModel.findByIdAndDelete(id)
+        } catch (error) {
+            console.log(error)
+        }
     }
 }

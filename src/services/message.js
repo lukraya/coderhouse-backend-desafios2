@@ -2,7 +2,11 @@ const messageModel = require('../dao/models/message')
 
 module.exports = class {
     async createMessage(message){
-        await messageModel.create(message)
+        try {
+            await messageModel.create(message)
+        } catch (error) {
+            console.log(error)
+        }
     }
 
     async getAllMessages(){
@@ -15,13 +19,21 @@ module.exports = class {
     }
 
     async updateMessage(id, data){
-        const messageUpdated = await messageModel.findByIdAndUpdate(id, data, {
-            new: true,
-        })
-        return messageUpdated
+        try {
+            const messageUpdated = await messageModel.findByIdAndUpdate(id, data, {
+                new: true,
+            })
+            return messageUpdated
+        } catch (error) {
+            console.log(error)
+        }
     }
 
     async deleteMessage(id){
-        await messageModel.findByIdAndDelete(id)
+        try {
+            await messageModel.findByIdAndDelete(id)
+        } catch (error) {
+            console.log(error)
+        }
     }
 }

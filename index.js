@@ -7,15 +7,15 @@ if(MODO_EJECUCION==="CLUSTER") {
     const numCPUs = require('os').cpus().length
 
     if(cluster.isMaster) {
-        console.log(numCPUs)
-        console.log(`PID Master: ${process.pid}`)
+        //console.log(numCPUs)
+        //console.log(`PID Master: ${process.pid}`)
 
         for(let i=0; i<numCPUs; i++){
             cluster.fork()
         }
 
         cluster.on('exit', worker => {
-            console.log('Worker', worker.process.pid, 'died', new Date().toLocaleString())
+            //console.log('Worker', worker.process.pid, 'died', new Date().toLocaleString())
             cluster.fork()
         })
     }
@@ -38,7 +38,6 @@ else {
         })
     }).catch(console.log)
 }
-
 
 
 /* process.on('exit', code => {
