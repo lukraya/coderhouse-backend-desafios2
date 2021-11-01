@@ -14,7 +14,7 @@ class InfoController {
             numCPUs
         }
 
-        //console.log(info)
+        console.log(info)
 
         res.render('./pages/info', {info})
     }

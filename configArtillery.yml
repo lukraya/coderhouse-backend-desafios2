@@ -1,14 +1,13 @@
 config:
-    target: http://localhost:9000/
+    target: 'http://localhost:9000'
     phases:
        - duration: 50
          arrivalRate: 1
          name: test
 scenarios:
-    flow:
-        loop:
-            get:
+    - name: "Get info"
+    - flow:
+        - loop:
+            - get:
                 url: '/info'
-        count: 20
-
-#No funciona
+          count: 20
