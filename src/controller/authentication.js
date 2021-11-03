@@ -21,7 +21,7 @@ class AuthenticationController {
         //const username = `${req.user.firstName} ${req.user.lastName}`
         req.logout()
 
-        res.render('./pages/logout', {layout: 'loggedout', username})
+        res.render('./pages/logout', {/* layout: 'loggedout', */ username})
     }    
 }
 
