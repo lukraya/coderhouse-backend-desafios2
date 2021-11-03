@@ -15,19 +15,19 @@ class IndexController {
         try {
             const products = await productService.getAllProducts()
             const messages = await messageService.getAllMessages()
-            //const username = req.user.username
-            logWarnCons.warn('El formato de username es específico para inicio con FB')
-            logWarnFile.warn('El formato de username es específico para inicio con FB')
-            const username = `${req.user.firstName} ${req.user.lastName}`
+            const username = req.user.username
+            //logWarnCons.warn('El formato de username es específico para inicio con FB')
+            //logWarnFile.warn('El formato de username es específico para inicio con FB')
+            /* const username = `${req.user.firstName} ${req.user.lastName}`
             const email = req.user.email
-            const picture = req.user.picture
+            const picture = req.user.picture */
             
-            logInfo.info(`Chequeo qué hay en email: ${email}`)
+            //logInfo.info(`Chequeo qué hay en email: ${email}`)
             
             logErrCons.error('Pruebo en un try exitoso el log de error')
             logErrFile.error('Pruebo en un try exitoso el log de error')
             
-            res.render('./pages/home', {messages, products, username, email, picture})
+            res.render('./pages/home', {messages, products, username/* , email, picture */})
 
         } catch (error) {
             //console.log(error)

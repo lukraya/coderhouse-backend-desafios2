@@ -14,8 +14,8 @@ const mongoOptions = {useNewUrlParser: true, useUnifiedTopology: true}
 //Authentication
 const passport = require('passport')
 const session = require("express-session")
-//require('./src/auth/passportLocal')
-require('./src/auth/passportFacebook')
+require('./src/auth/passportLocal')
+//require('./src/auth/passportFacebook')
 
 //Require middlewares
 const cookieParser = require("cookie-parser")
