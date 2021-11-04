@@ -26,13 +26,13 @@ module.exports = (router) =>{
     //AUTHENTICATION
     //Login
     .get('/login', getLogin)
-    .post('/login', passport.authenticate('login', { failureRedirect: '/faillogin', successRedirect: '/' }))
+    //.post('/login', passport.authenticate('login', { failureRedirect: '/faillogin', successRedirect: '/' }))
     //Signup
     .get('/signup', getSignup)
-    .post('/signup', passport.authenticate('signup', { failureRedirect: '/failsignup', successRedirect: '/login' }))
+    //.post('/signup', passport.authenticate('signup', { failureRedirect: '/failsignup', successRedirect: '/login' }))
     //Facebook
-    //.get('/login-facebook', passport.authenticate('facebook'))
-    //.get('/login-facebook/view', passport.authenticate('facebook', {successRedirect: '/', failureRedirect: '/faillogin'}))
+    .get('/login-facebook', passport.authenticate('facebook'))
+    .get('/login-facebook/view', passport.authenticate('facebook', {successRedirect: '/', failureRedirect: '/faillogin'}))
     //Error
     .get('/faillogin', getFaillogin)
     .get('/failsignup', getFailsignup)

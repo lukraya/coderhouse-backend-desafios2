@@ -1,5 +1,4 @@
-//require('dotenv').config()
-//Deshabilitado para heroku
+require('dotenv').config()
 
 module.exports = {
     MODO_EJECUCION: process.argv[2] || 'FORK',

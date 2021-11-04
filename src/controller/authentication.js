@@ -17,8 +17,8 @@ class AuthenticationController {
     }
 
     async getLogout (req, res){
-        const username = req.user.username
-        //const username = `${req.user.firstName} ${req.user.lastName}`
+        //const username = req.user.username
+        const username = `${req.user.firstName} ${req.user.lastName}`
         req.logout()
 
         res.render('./pages/logout', {/* layout: 'loggedout', */ username})
