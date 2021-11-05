@@ -10,5 +10,7 @@ module.exports = {
     FB_TEST_APP_SECRET: process.argv[5] || process.env.FB_TEST_APP_SECRET || 'c4430bc93a8fea949fd85cf44d4d9fa8',
     TWILIO_ACCOUNT_SID: process.env.TWILIO_ACCOUNT_SID,
     TWILIO_AUTH_TOKEN: process.env.TWILIO_AUTH_TOKEN,
-    PASS_GMAIL: process.env.PASS_GMAIL
+    PASS_GMAIL: process.env.PASS_GMAIL,
+    USER_GMAIL: process.env.USER_GMAIL,
+    ADMIN_PHONE: process.env.ADMIN_PHONE
 }

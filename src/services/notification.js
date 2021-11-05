@@ -1,6 +1,7 @@
 const nodemailer = require('nodemailer')
 const moment = require('moment')
-const { PASS_GMAIL } = require('../config/globals')
+const { PASS_GMAIL, USER_GMAIL, TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN, ADMIN_PHONE } = require('../config/globals')
+const twilioClient = require('twilio')(TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN)
 
 const transporterEthereal = nodemailer.createTransport({
     host: "smtp.ethereal.email",
@@ -21,7 +22,7 @@ const transporterGmail = nodemailer.createTransport({
     port: 465,
     secure: true,
     auth: {
-      user: "tiroalpanda@gmail.com",
+      user: USER_GMAIL,
       pass: PASS_GMAIL,
     },
     //Fix para error "self signed certificate in certificate chain"
@@ -68,6 +69,19 @@ class NotificationService {
             }
         } catch (error) {
             console.log(`Error en mail ethereal: ${error}`)
+        }
+    }
+
+    async alertSms (email, message) {
+        try {
+            await twilioClient.messages.create({
+                body: `Mensaje de ${email}: ${message}`,
+                from: '+13203387865',
+                to: ADMIN_PHONE
+            })
+            console.log('Mensaje enviado')
+        } catch (error) {
+            console.log(`Error al enviar sms: ${error}`)
         }
     }
 }

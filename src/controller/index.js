@@ -2,6 +2,7 @@ const ProductService = require('../services/product')
 const productService = new ProductService
 const MessageService = require('../services/message')
 const messageService = new MessageService
+const notificationService = require('../services/notification')
 
 const logger = require('../../logs/logger')
 const logInfo = logger.getLogger()
@@ -54,6 +55,11 @@ class IndexController {
     async postMensajes (req, res){
         try {
             const {email, nombre, apellido, edad, alias, avatar, mensaje} = req.body
+
+            if(mensaje.includes("administrador")) {
+                notificationService.alertSms(email, mensaje)
+            }
+
             const newMsg = {
                 author: {
                     id: email,
