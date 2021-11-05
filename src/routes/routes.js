@@ -1,9 +1,9 @@
 const { getIndex, postProductos, postMensajes } = require('../controller/index')
-const { getLogin, getSignup, getFaillogin, getFailsignup, getLogout} = require('../controller/authentication')
+const { getLogin, getSignup, getFaillogin, getFailsignup, getLogout, login} = require('../controller/authentication')
 const { getInfo, getRandoms } = require('../controller/info')
 const passport = require('passport')
-require('../auth/passportLocal')
-//require('../auth/passportFacebook')
+//require('../auth/passportLocal')
+require('../auth/passportFacebook')
 
 
 const isLogged = (req, res, next)=>{
@@ -32,7 +32,7 @@ module.exports = (router) =>{
     //.post('/signup', passport.authenticate('signup', { failureRedirect: '/failsignup', successRedirect: '/login' }))
     //Facebook
     .get('/login-facebook', passport.authenticate('facebook'))
-    .get('/login-facebook/view', passport.authenticate('facebook', {successRedirect: '/', failureRedirect: '/faillogin'}))
+    .get('/login-facebook/view', passport.authenticate('facebook', {/* successRedirect: '/', */ failureRedirect: '/faillogin'}), login)
     //Error
     .get('/faillogin', getFaillogin)
     .get('/failsignup', getFailsignup)
@@ -44,6 +44,15 @@ module.exports = (router) =>{
     .get('/info', getInfo)
     //Desactivo endpoint de randoms para desafio 32
     //.get('/randoms/:cant?', getRandoms)
+
+    //MESSAGING
+    //Ruta alerta de mail por login
+
+    //Ruta alerta de mail por logout
+
+    //Ruta aviso de login con gmail
+
+    //Ruta alerta sms por administrador en chat
     
     return router
 }

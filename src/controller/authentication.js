@@ -1,3 +1,4 @@
+const notificationService = require('../services/notification')
 
 class AuthenticationController {
     async getLogin (req, res){
@@ -18,11 +19,27 @@ class AuthenticationController {
 
     async getLogout (req, res){
         //const username = req.user.username
-        const username = `${req.user.firstName} ${req.user.lastName}`
+        const { email, picture, firstName, lastName } = req.user
+        const username = `${firstName} ${lastName}`
+        const event = 'Logout'
+
+        notificationService.alertMail(event, username, email, picture)
+
         req.logout()
 
         res.render('./pages/logout', {/* layout: 'loggedout', */ username})
-    }    
+    }
+    
+    async login (req, res){
+        //console.log(req.user)
+        const { email, picture, firstName, lastName } = req.user
+        const username = `${firstName} ${lastName}`
+        const event = 'Login'
+
+        notificationService.alertMail(event, username, email, picture)
+
+        res.redirect('/')
+    }
 }
 
 module.exports = new AuthenticationController
