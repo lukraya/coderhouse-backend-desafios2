@@ -44,15 +44,6 @@ module.exports = (router) =>{
     .get('/info', getInfo)
     //Desactivo endpoint de randoms para desafio 32
     //.get('/randoms/:cant?', getRandoms)
-
-    //MESSAGING
-    //Ruta alerta de mail por login
-
-    //Ruta alerta de mail por logout
-
-    //Ruta aviso de login con gmail
-
-    //Ruta alerta sms por administrador en chat
     
     return router
 }

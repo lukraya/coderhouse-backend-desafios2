@@ -13,4 +13,3 @@ exports.generatePassword = (password)=>{
         hash: genHash
     }
 }
-

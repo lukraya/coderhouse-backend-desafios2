@@ -1,7 +1,5 @@
-const ProductService = require('../services/product')
-const productService = new ProductService
-const MessageService = require('../services/message')
-const messageService = new MessageService
+const productService = require('../services/product')
+const messageService = require('../services/message')
 const notificationService = require('../services/notification')
 
 const logger = require('../../logs/logger')

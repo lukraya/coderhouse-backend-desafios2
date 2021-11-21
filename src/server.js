@@ -1,4 +1,4 @@
-const { SESSION_SECRET, MONGO_URI } = require("./src/config/globals")
+const { SESSION_SECRET, MONGO_URI } = require("./config/globals")
 
 //Server
 const http = require('http')
@@ -15,7 +15,7 @@ const mongoOptions = {useNewUrlParser: true, useUnifiedTopology: true}
 const passport = require('passport')
 const session = require("express-session")
 //require('./src/auth/passportLocal')
-require('./src/auth/passportFacebook')
+require('./auth/passportFacebook')
 
 //Require middlewares
 const cookieParser = require("cookie-parser")
@@ -65,7 +65,7 @@ app.use('/static', express.static('static'))
 
 
 //Las rutas después de json o urlencoded!!
-const routes = require('./src/routes/routes')
+const routes = require('./routes/routes')
 app.use(routes(router))
 
 module.exports = server

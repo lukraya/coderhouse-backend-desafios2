@@ -1,6 +1,6 @@
 const productModel = require('../dao/models/product')
 
-module.exports = class {
+class ProductService {
     async createProduct(product){
         try {
             await productModel.create(product)
@@ -45,3 +45,5 @@ module.exports = class {
         }
     }
 }
+
+module.exports = new ProductService

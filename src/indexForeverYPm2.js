@@ -1,5 +1,5 @@
-const { PORT } = require('./src/config/globals')
-const {getConnection} = require('./src/dao/db/connection')
+const { PORT } = require('./config/globals')
+const {getConnection} = require('./dao/db/connection')
 const server = require('./server')
 
 getConnection().then((message)=>{

@@ -15,7 +15,6 @@ function getRandoms(cant) {
     }
 }
 
-
 //Encuentro el número de veces que aparece un valor en el array
 function getOccurrence(array, value) {
     let count = 0;
@@ -34,7 +33,6 @@ function getResult(array) {
         }
     })
 }
-
 
 process.on('message', msg => {
     getRandoms(msg)

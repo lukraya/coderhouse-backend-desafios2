@@ -1,6 +1,6 @@
 const messageModel = require('../dao/models/message')
 
-module.exports = class {
+class MessageService {
     async createMessage(message){
         try {
             await messageModel.create(message)
@@ -37,3 +37,5 @@ module.exports = class {
         }
     }
 }
+
+module.exports = new MessageService

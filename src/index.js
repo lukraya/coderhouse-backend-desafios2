@@ -1,5 +1,5 @@
-const { MODO_EJECUCION, PORT} = require('./src/config/globals')
-const {getConnection} = require('./src/dao/db/connection')
+const { MODO_EJECUCION, PORT} = require('./config/globals')
+const {getConnection} = require('./dao/db/connection')
 const server = require('./server')
 
 if(MODO_EJECUCION==="CLUSTER") {

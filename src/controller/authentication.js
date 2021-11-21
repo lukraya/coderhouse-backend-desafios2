@@ -1,18 +1,16 @@
 const notificationService = require('../services/notification')
 
 class AuthenticationController {
+    //Rendering
     async getLogin (req, res){
         res.render('./pages/login')
     }
-
     async getSignup (req, res){
         res.render('./pages/signup')
     }
-
     async getFaillogin (req, res){
         res.render('./pages/login-fail')
     }
-
     async getFailsignup (req, res){
         res.render('./pages/signup-fail')
     }
