@@ -20,7 +20,7 @@ module.exports = (router) =>{
 
     //INDEX
     .get('/', isLogged, getIndex)
-    .post('/productos', postProductos)
+    //.post('/productos', postProductos)
     .post('/mensajes', postMensajes)
     
     //AUTHENTICATION

@@ -53,6 +53,7 @@ app.use(
         }
     })
 )
+
 //Setting middlewares
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
@@ -64,8 +65,22 @@ app.use(compression())
 app.use('/static', express.static('static'))
 
 
+//GRAPHQL
+const { graphqlHTTP } = require('express-graphql')
+const { schema, root } = require('./services/graphql')
+
+app.use('/graphql', graphqlHTTP({
+    schema: schema,
+    rootValue: root,
+    graphiql: true
+}))
+
+
 //Las rutas después de json o urlencoded!!
 const routes = require('./routes/routes')
 app.use(routes(router))
+
+
+
 
 module.exports = server
