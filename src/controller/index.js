@@ -1,5 +1,7 @@
 const productService = require('../services/product')
-const messageService = require('../services/message')
+const MessageService = require('../services/message')
+const messageModel = require('../dao/models/message')
+const messageService = new MessageService(messageModel)
 const notificationService = require('../services/notification')
 
 const logger = require('../../logs/logger')

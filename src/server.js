@@ -80,7 +80,4 @@ app.use('/graphql', graphqlHTTP({
 const routes = require('./routes/routes')
 app.use(routes(router))
 
-
-
-
 module.exports = server
