@@ -1,7 +1,7 @@
 const { fork } = require('child_process')
 const numCPUs = require('os').cpus().length
 
-class InfoController {
+const infoController = ()=>({
     getInfo (req, res) {
         const info = {
             argumentos: process.argv,
@@ -17,7 +17,7 @@ class InfoController {
         //console.log(info)
 
         res.render('./pages/info', {info})
-    }
+    },
 
     //getRandoms desactivado para desafio 32
     /* getRandoms (req, res) {
@@ -29,6 +29,6 @@ class InfoController {
             res.send(`El resultado es ${JSON.stringify(result)}`)
         })
     } */
-}
+})
 
-module.exports = new InfoController
+module.exports = infoController

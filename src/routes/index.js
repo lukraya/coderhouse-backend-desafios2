@@ -1,10 +1,8 @@
-const { getIndex, postProductos, postMensajes } = require('../controller/index')
-const { getLogin, getSignup, getFaillogin, getFailsignup, getLogout, login} = require('../controller/authentication')
-const { getInfo, getRandoms } = require('../controller/info')
+const router = require('express').Router()
+const { mainController, authController, infoController } = require('../controller')
 const passport = require('passport')
 //require('../auth/passportLocal')
 require('../auth/passportFacebook')
-
 
 const isLogged = (req, res, next)=>{
     if (req.isAuthenticated()){
@@ -15,33 +13,32 @@ const isLogged = (req, res, next)=>{
     }
 }
 
-module.exports = (router) =>{
+module.exports = routerConfig = () => {
     router
 
-    //INDEX
-    .get('/', isLogged, getIndex)
+    //MAIN
+    .get('/', isLogged, mainController.getIndex)
     //.post('/productos', postProductos)
-    .post('/mensajes', postMensajes)
+    .post('/mensajes', mainController.postMensajes)
     
     //AUTHENTICATION
     //Login
-    .get('/login', getLogin)
+    .get('/login', authController.getLogin)
     //.post('/login', passport.authenticate('login', { failureRedirect: '/faillogin', successRedirect: '/' }))
     //Signup
-    .get('/signup', getSignup)
+    .get('/signup', authController.getSignup)
     //.post('/signup', passport.authenticate('signup', { failureRedirect: '/failsignup', successRedirect: '/login' }))
     //Facebook
     .get('/login-facebook', passport.authenticate('facebook'))
-    .get('/login-facebook/view', passport.authenticate('facebook', {/* successRedirect: '/', */ failureRedirect: '/faillogin'}), login)
+    .get('/login-facebook/view', passport.authenticate('facebook', {/* successRedirect: '/', */ failureRedirect: '/faillogin'}), authController.login)
     //Error
-    .get('/faillogin', getFaillogin)
-    .get('/failsignup', getFailsignup)
-
-    //LOGOUT    
-    .get('/logout', getLogout)
+    .get('/faillogin', authController.getFaillogin)
+    .get('/failsignup', authController.getFailsignup)
+    //Logout
+    .get('/logout', authController.getLogout)
 
     //INFO Y RANDOM
-    .get('/info', getInfo)
+    .get('/info', infoController.getInfo)
     //Desactivo endpoint de randoms para desafio 32
     //.get('/randoms/:cant?', getRandoms)
     

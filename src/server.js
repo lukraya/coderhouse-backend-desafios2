@@ -5,7 +5,7 @@ const http = require('http')
 const express = require('express')
 const app = express()
 const server = http.createServer(app)
-const router = express.Router()
+//const router = express.Router()
 
 //db
 const MongoStore = require('connect-mongo')
@@ -67,7 +67,7 @@ app.use('/static', express.static('static'))
 
 //GRAPHQL
 const { graphqlHTTP } = require('express-graphql')
-const { schema, root } = require('./services/graphql')
+const { schema, root } = require('./services/graphqlService')
 
 app.use('/graphql', graphqlHTTP({
     schema: schema,
@@ -77,7 +77,7 @@ app.use('/graphql', graphqlHTTP({
 
 
 //Las rutas después de json o urlencoded!!
-const routes = require('./routes/routes')
-app.use(routes(router))
+const routes = require('./routes')
+app.use(routes(/* router */))
 
 module.exports = server

@@ -1,13 +1,13 @@
 const productModel = require('../dao/models/product')
 
-class ProductService {
+const productService = (models)=>({
     async createProduct(product){
         try {
             await productModel.create(product)
         } catch (error) {
             console.log(error)
         }
-    }
+    },
 
     async getProduct(id){
         try {
@@ -15,7 +15,7 @@ class ProductService {
         } catch (error) {
             console.log(error)
         }
-    }
+    },
 
     async getAllProducts(){
         try {
@@ -24,7 +24,7 @@ class ProductService {
         } catch (error) {
             console.log(error)
         }
-    }
+    },
 
     async updateProduct(id, data){
         try {
@@ -35,7 +35,7 @@ class ProductService {
         } catch (error) {
             console.log(error)
         }
-    }
+    },
 
     async deleteProduct(id){
         try {
@@ -43,7 +43,7 @@ class ProductService {
         } catch (error) {
             console.log(error)
         }
-    }
-}
+    },
+})
 
-module.exports = new ProductService
+module.exports = productService
