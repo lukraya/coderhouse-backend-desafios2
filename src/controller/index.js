@@ -4,7 +4,7 @@ const messageModel = require('../dao/models/message')
 const messageService = new MessageService(messageModel)
 const notificationService = require('../services/notification')
 
-const logger = require('../../logs/logger')
+const logger = require('../logs/logger')
 const logInfo = logger.getLogger()
 const logWarnCons = logger.getLogger('consoleWarn')
 const logWarnFile = logger.getLogger('fileWarn')

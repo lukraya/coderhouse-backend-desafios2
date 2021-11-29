@@ -1,3 +1,4 @@
 # dependencies
 /node_modules
 .env
+/src/utils/factory.js

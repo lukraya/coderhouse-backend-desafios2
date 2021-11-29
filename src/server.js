@@ -29,14 +29,14 @@ app.engine(
     handlebars({
         extname: "hbs",
         defaultLayout: "main.hbs",
-        layoutsDir: "./views/layouts",
-        partialsDir: "./views/partials",    
+        layoutsDir: "./src/views/layouts",
+        partialsDir: "./src/views/partials",    
     })
 );
 // Establece el motor de plantilla a utilizar
 app.set("view engine", "hbs")
 // Establece el directorio donde se encuentran los archivos de plantillas
-app.set("views", './views')
+app.set("views", './src/views')
 
 //Middleware session
 app.use(
