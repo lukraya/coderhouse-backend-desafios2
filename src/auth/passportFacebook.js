@@ -1,7 +1,7 @@
 const passport = require('passport')
 const FacebookStrategy = require('passport-facebook').Strategy
 const { FB_TEST_APP_ID, FB_TEST_APP_SECRET } = require('../config/globals')
-const userFbModel = require('../dao/models/userFb')
+const userFbModel = require('../dal/models/userFb')
 
 
 const loginVerifyCallback = (accessToken, refreshToken, profile, done)=>{

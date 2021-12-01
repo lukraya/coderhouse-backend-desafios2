@@ -1,11 +1,13 @@
+const { NODE_ENV } = require('../config/globals')
+
 class MessageService {
-    constructor (models) {
-        this.model = models.messageModel
+    constructor (repository) {
+        this.repository = repository
     }
 
     async createMessage(message){
         try {
-            const newMsg = await this.model.create(message)
+            const newMsg = await this.repository.create(message)
             return newMsg
         } catch (error) {
             console.log(error)
@@ -14,8 +16,13 @@ class MessageService {
 
     async getAllMessages(){
         try {
-            let msgs = await this.model.find()/* .lean() */
-            return msgs
+            if(NODE_ENV.trim() === 'staging') {
+                const msgs = await this.repository.getAll()
+                return msgs
+            } else {
+                const msgs = await this.repository.getAllLean()
+                return msgs
+            }
         } catch (error) {
             console.log(error)
         }
@@ -23,7 +30,7 @@ class MessageService {
 
     async updateMessage(id, data){
         try {
-            const messageUpdated = await this.model.findByIdAndUpdate(id, data, {
+            const messageUpdated = await this.repository.update(id, data, {
                 new: true,
             })
             return messageUpdated
@@ -34,7 +41,7 @@ class MessageService {
 
     async deleteMessage(id){
         try {
-            await this.model.findByIdAndDelete(id)
+            await this.repository.delete(id)
         } catch (error) {
             console.log(error)
         }

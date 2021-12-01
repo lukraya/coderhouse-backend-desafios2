@@ -1,7 +1,7 @@
 const passport = require('passport')
 const LocalStrategy = require('passport-local').Strategy
 const { validatePassword, generatePassword } = require('../utils/passportUtils')
-const userModel = require('../dao/models/user')
+const userModel = require('../dal/models/user')
 
 const loginVerifyCallback = (req, username, password, done)=>{
     userModel.findOne({username})

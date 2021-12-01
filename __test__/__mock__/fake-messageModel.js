@@ -1,3 +1,7 @@
+const lean = (data)=>{
+    return data
+}
+
 module.exports = class {
     constructor(data) {
         this.data = data
@@ -7,7 +11,9 @@ module.exports = class {
         const { fakeMessageList } = this.data
         return new Promise(function (resolve, reject){
             if (fakeMessageList) {
-                resolve(fakeMessageList)
+                resolve(fakeMessageList).then((res)=>{
+                    lean(res)
+                })
             } else {
                 reject(new Error('Mock error on findAll'))
             }

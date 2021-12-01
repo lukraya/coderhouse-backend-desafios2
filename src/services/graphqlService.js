@@ -1,5 +1,5 @@
 const { buildSchema } = require('graphql')
-const productModel = require('../dao/models/product')
+const productModel = require('../dal/models/product')
 
 exports.schema = buildSchema(`
     input ProductInput {

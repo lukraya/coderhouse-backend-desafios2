@@ -1,11 +1,11 @@
 class ProductService {
-    constructor(models) {
-        this.model = models.productModel
+    constructor(dao) {
+        this.dao = dao
     }
 
     async createProduct(product){
         try {
-            await this.model.create(product)
+            await this.dao.create(product)
         } catch (error) {
             console.log(error)
         }
@@ -13,7 +13,7 @@ class ProductService {
 
     async getProduct(id){
         try {
-            return this.model.findById(id)
+            return this.dao.getById(id)
         } catch (error) {
             console.log(error)
         }
@@ -21,7 +21,7 @@ class ProductService {
 
     async getAllProducts(){
         try {
-            let prods = await this.model.find().lean()
+            let prods = await this.dao.getAll()
             return prods
         } catch (error) {
             console.log(error)
@@ -30,7 +30,7 @@ class ProductService {
 
     async updateProduct(id, data){
         try {
-            const productUpdated = await this.model.findByIdAndUpdate(id, data, {
+            const productUpdated = await this.dao.update(id, data, {
                 new: true,
             })
             return productUpdated
@@ -41,7 +41,7 @@ class ProductService {
 
     async deleteProduct(id){
         try {
-            await this.model.findByIdAndDelete(id)
+            await this.dao.delete(id)
         } catch (error) {
             console.log(error)
         }
