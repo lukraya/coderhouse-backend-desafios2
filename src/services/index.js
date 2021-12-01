@@ -1,9 +1,11 @@
-const productService = require('./productService')
-const messageService = require('./messageService')
-const notificationService = require('./notificationService')
+const ProductService = require('./productService')
+const MessageService = require('./messageService')
+const NotificationService = require('./notificationService')
+const models = require('../dao/models')
 
+//"Singleton" classes: clases instanciadas una sola vez, en tiempo de compilación
 module.exports = {
-    productService: productService(/* models */),
-    messageService: messageService(/* models */),
-    notificationService: notificationService()
+    productService: new ProductService(models),
+    messageService: new MessageService(models),
+    notificationService: new NotificationService()
 }

@@ -55,7 +55,7 @@ const sendGmail = async (username, email, photo) => {
     })
 }
 
-const notificationService = ()=>({
+class NotificationService {
     async alertMail (event, username, email, photo) {
         try {
             await sendEthereal(event, username)
@@ -70,7 +70,7 @@ const notificationService = ()=>({
         } catch (error) {
             console.log(`Error en mail ethereal: ${error}`)
         }
-    },
+    }
 
     async alertSms (email, message) {
         try {
@@ -84,6 +84,6 @@ const notificationService = ()=>({
             console.log(`Error al enviar sms: ${error}`)
         }
     }
-})
+}
 
-module.exports = notificationService
+module.exports = NotificationService

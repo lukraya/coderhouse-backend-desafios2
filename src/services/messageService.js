@@ -1,42 +1,44 @@
-const messageModel = require('../dao/models/message')
+class MessageService {
+    constructor (models) {
+        this.model = models.messageModel
+    }
 
-const messageService = (models)=>({
     async createMessage(message){
         try {
-            const newMsg = await messageModel.create(message)
+            const newMsg = await this.model.create(message)
             return newMsg
         } catch (error) {
             console.log(error)
         }
-    },
+    }
 
     async getAllMessages(){
         try {
-            let msgs = await messageModel.find().lean()
+            let msgs = await this.model.find()/* .lean() */
             return msgs
         } catch (error) {
             console.log(error)
         }
-    },
+    }
 
     async updateMessage(id, data){
         try {
-            const messageUpdated = await messageModel.findByIdAndUpdate(id, data, {
+            const messageUpdated = await this.model.findByIdAndUpdate(id, data, {
                 new: true,
             })
             return messageUpdated
         } catch (error) {
             console.log(error)
         }
-    },
+    }
 
     async deleteMessage(id){
         try {
-            await messageModel.findByIdAndDelete(id)
+            await this.model.findByIdAndDelete(id)
         } catch (error) {
             console.log(error)
         }
     }
-})
+}
 
-module.exports = messageService
+module.exports = MessageService

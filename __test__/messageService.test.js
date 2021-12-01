@@ -1,27 +1,22 @@
-const MessageService = require('../src/services/message')
-const FakeMessageModel = require('./__mock__/fake-messageModel')
+const { messageService } = require('../src/services')
 
 describe("Message service test", ()=>{
     it("getAllMessages() should return an array of elements if there's any", async ()=> {
-        const elements = require('./__mock__/fake-messages-list')
-        const service = new MessageService(new FakeMessageModel(elements))
-        const response = await service.getAllMessages()
+        const response = await messageService.getAllMessages()
         expect(Array.isArray(response)).toBeTruthy()
+        expect(response.length).not.toBe(0)
     })
-
-    it("getAllMessages() should return and empty array when there's no elements", async ()=>{
-        const elements = require('./__mock__/fake-messages-empty')
-        const service = new MessageService(new FakeMessageModel(elements))
-        const response = await service.getAllMessages()
-        expect(Array.isArray(response)).toBeTruthy()
-        expect(response.length).toBe(0)
+    
+    it("findByIdAndUpdate() should return a valid object after updating", async ()=> {
+        const element = require('./__mock__/fake-message-updated')
+        const response = await messageService.updateMessage("correctId", element)
+        expect(response).toEqual(element)
     })
 
     it("createMessage() should return the new data when the message is saved", async ()=>{
         const element = require('./__mock__/fake-message-new')
-        const service = new MessageService(new FakeMessageModel(element))
         const {authour, text} = element
-        const response = await service.createMessage({authour, text})
+        const response = await messageService.createMessage({authour, text})
         expect(response).toEqual(element)
     })
 })
