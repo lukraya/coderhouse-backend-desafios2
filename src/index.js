@@ -1,4 +1,4 @@
-const { MODO_EJECUCION, PORT} = require('./config/globals')
+const { MODO_EJECUCION, PORT,} = require('./config/globals')
 const {getConnection} = require('./dal/db/connection')
 const server = require('./server')
 
@@ -24,7 +24,10 @@ if(MODO_EJECUCION==="CLUSTER") {
             console.log(message)
             server.listen(PORT, (err) => {
                 if (err) {console.log(err);}
-                else {console.log("Server listening on PORT", PORT);}
+                else {
+                    console.log("Server listening on PORT", PORT)
+                    /* console.log("Enviroment: ", NODE_ENV) */
+                }
             })
         }).catch(console.log)
     }
@@ -34,7 +37,10 @@ else {
         console.log(message)
         server.listen(PORT, (err) => {
             if (err) {console.log(err);}
-            else {console.log(`Server listening on PORT ${PORT} - PID WORKER ${process.pid}`);}
+            else {
+                console.log(`Server listening on PORT ${PORT} - PID WORKER ${process.pid}`)
+                /* console.log("Enviroment: ", NODE_ENV) */
+            }
         })
     }).catch(console.log)
 }
