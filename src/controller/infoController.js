@@ -16,7 +16,8 @@ const infoController = ()=>({
 
         //console.log(info)
 
-        res.render('./pages/info', {info})
+        res.json(info)
+        //res.render('./pages/info', {info})
     },
 
     //getRandoms desactivado para desafio 32

@@ -1,17 +1,18 @@
 const authController = ({ notificationService })=>({
     //Rendering
-    async getLogin (req, res){
+    /* async getLogin (req, res){
         res.render('./pages/login')
-    },
-    async getSignup (req, res){
+    }, */
+    /* async getSignup (req, res){
         res.render('./pages/signup')
-    },
+    }, */
     async getFaillogin (req, res){
-        res.render('./pages/login-fail')
+        res.send('Error en log in')
+        //res.render('./pages/login-fail')
     },
-    async getFailsignup (req, res){
+    /* async getFailsignup (req, res){
         res.render('./pages/signup-fail')
-    },
+    }, */
 
     async getLogout (req, res){
         //const username = req.user.username
@@ -23,7 +24,8 @@ const authController = ({ notificationService })=>({
 
         req.logout()
 
-        res.render('./pages/logout', {/* layout: 'loggedout', */ username})
+        res.json({msg: `Hasta luego, ${username}`})
+        //res.render('./pages/logout', {/* layout: 'loggedout', */ username})
     },
     
     async login (req, res){

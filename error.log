@@ -1,2 +1,5 @@
 [2021-10-26T00:59:14.510] [ERROR] fileErr - Pruebo en un try exitoso el log de error
 [2021-11-04T01:56:48.743] [ERROR] fileErr - Pruebo en un try exitoso el log de error
+[2021-12-10T01:21:20.386] [ERROR] fileErr - Error: TypeError: Cannot destructure property 'firstName' of 'req.user' as it is undefined.
+[2021-12-10T01:34:22.375] [ERROR] fileErr - Error: TypeError: Cannot read property 'includes' of undefined
+[2021-12-10T01:36:39.900] [ERROR] fileErr - Error: TypeError: Cannot read property 'includes' of undefined

@@ -8,21 +8,22 @@ const logErrFile = logger.getLogger('fileErr')
 const mainController = ({ productService, messageService, notificationService })=>({
     async getIndex(req, res) {
         try {
+            //const { firstName, lastName, email, picture} = req.user
             const products = await productService.getAllProducts()
             const messages = await messageService.getAllMessages()
-            //const username = req.user.username
-            //logWarnCons.warn('El formato de username es específico para inicio con FB')
-            //logWarnFile.warn('El formato de username es específico para inicio con FB')
-            const username = `${req.user.firstName} ${req.user.lastName}`
-            const email = req.user.email
-            const picture = req.user.picture
             
-           // logInfo.info(`Chequeo qué hay en email: ${email}`)
-            
-            //logErrCons.error('Pruebo en un try exitoso el log de error')
-            //logErrFile.error('Pruebo en un try exitoso el log de error')
-            
-            res.render('./pages/home', {messages, products, username, email, picture})
+            const result = {
+                /* user: {
+                    username: `${firstName} ${lastName}`,
+                    email,
+                    picture
+                }, */
+                products,
+                messages
+            }
+             
+            res.json(result)
+            //res.render('./pages/home', {messages, products, username, email, picture})
 
         } catch (error) {
             //console.log(error)
@@ -49,7 +50,7 @@ const mainController = ({ productService, messageService, notificationService })
     async postMensajes(req, res) {
         try {
             const {email, nombre, apellido, edad, alias, avatar, mensaje} = req.body
-
+            
             if(mensaje.includes("administrador")) {
                 notificationService.alertSms(email, mensaje)
             }

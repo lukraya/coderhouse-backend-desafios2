@@ -1,4 +1,7 @@
 # dependencies
 /node_modules
-.env
-/src/utils/factory.js
+development.env
+production.env
+/src/views
+
+/src/auth/passportLocal.js

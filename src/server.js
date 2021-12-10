@@ -21,10 +21,10 @@ require('./auth/passportFacebook')
 const cookieParser = require("cookie-parser")
 const cors = require('cors')
 const compression = require('compression')
-const handlebars = require("express-handlebars")
+//const handlebars = require("express-handlebars")
 
 //Configuración de motor de plantilla
-app.engine(
+/* app.engine(
     "hbs",
     handlebars({
         extname: "hbs",
@@ -36,7 +36,7 @@ app.engine(
 // Establece el motor de plantilla a utilizar
 app.set("view engine", "hbs")
 // Establece el directorio donde se encuentran los archivos de plantillas
-app.set("views", './src/views')
+app.set("views", './src/views') */
 
 //Middleware session
 app.use(
